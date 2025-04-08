@@ -1,0 +1,281 @@
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(to bottom, #ffebf0, #ffe6f0);
+    color: #660033;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.step {
+    display: none;
+    padding: 20px;
+    border: 2px solid #ff99aa;
+    border-radius: 10px;
+    background: #fff0f5;
+    box-shadow: 0 4px 6px rgba(255, 153, 170, 0.3);
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+.step.active {
+    display: block;
+    animation: fadeIn 1s ease-in-out;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #ffccd5;
+    color: white;
+    border: 1px solid #ff99aa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #ff99aa;
+    transform: scale(1.05);
+}
+
+#no-btn {
+    position: absolute;
+    transition: top 0.3s, left 0.3s;
+}
+
+#heart-game {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#heart {
+    font-size: 40px;
+    position: absolute;
+    cursor: pointer;
+    transition: top 0.3s, left 0.3s; /* Dodajemy płynne przejście */
+}
+
+.alert {
+    position: fixed;
+    bottom: 0;
+    left: 100%;
+    background: #ff99aa;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    animation: moveAlert 10s linear infinite;
+}
+
+.things {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Zwiększamy szerokość kolumn */
+    gap: 10px;
+    margin-top: 20px;
+    max-height: 70vh; /* Ograniczamy wysokość tabeli */
+    overflow-y: auto; /* Dodajemy przewijanie w pionie, jeśli potrzeba */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.item {
+    background: #ffccd5; /* Różowe tło */
+    color: #660033; /* Tekst */
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0; /* Ukrywamy element */
+    transform: translateY(20px); /* Przesunięcie w dół */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.item.visible {
+    opacity: 1; /* Pokazujemy element */
+    transform: translateY(0); /* Przywracamy pozycję */
+}
+
+.hidden-item {
+    background: #ff6666; /* Czerwone tło */
+    color: transparent; /* Ukrywamy tekst */
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    opacity: 0; /* Ukrywamy element */
+    transform: translateY(20px); /* Przesunięcie w dół */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hidden-item.visible {
+    opacity: 1; /* Pokazujemy element */
+    transform: translateY(0); /* Przywracamy pozycję */
+    color: #660033; /* Ujawnienie tekstu */
+}
+
+.images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Odstęp między zdjęciami */
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.image {
+    width: 45%; /* Skalujemy zdjęcia do 45% szerokości kontenera */
+    height: auto; /* Zachowujemy proporcje */
+    border: 3px solid #ff99aa; /* Subtelny akcent czerwieni */
+    border-radius: 10px; /* Zaokrąglone rogi */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Lekki cień */
+    transition: transform 0.3s ease; /* Dodajemy efekt powiększenia */
+}
+
+.image:hover {
+    transform: scale(1.05); /* Powiększenie zdjęcia po najechaniu */
+}
+
+.us-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #660033;
+    margin-top: 10px;
+}
+
+.background-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.heart {
+    position: absolute;
+    width: 30px; /* Zwiększamy rozmiar serduszek */
+    height: 30px;
+    background-color: #ff6699; /* Intensywniejszy różowy kolor */
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+    animation: float 6s infinite ease-in-out;
+    opacity: 0.9; /* Zwiększamy widoczność */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes moveAlert {
+    0% {
+        left: 100%;
+    }
+    50% {
+        left: 50%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+@keyframes moveHeart {
+    0% {
+        top: 5%;
+        left: 5%;
+    }
+    20% {
+        top: 15%;
+        left: 70%;
+    }
+    40% {
+        top: 60%;
+        left: 80%;
+    }
+    60% {
+        top: 80%;
+        left: 20%;
+    }
+    80% {
+        top: 40%;
+        left: 10%;
+    }
+    100% {
+        top: 5%;
+        left: 5%;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) translateX(20vw);
+        opacity: 0;
+    }
+}
+
+/* Responsywność dla urządzeń mobilnych */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Zmniejszamy rozmiar czcionki */
+    }
+
+    .step {
+        max-width: 90%; /* Zmniejszamy szerokość kroku */
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px; /* Zmniejszamy rozmiar tekstu w przyciskach */
+        padding: 8px 15px;
+    }
+
+    #heart-game {
+        height: 200px; /* Zmniejszamy rozmiar ramki gry */
+        width: 200px;
+    }
+
+    #heart {
+        font-size: 30px; /* Zmniejszamy rozmiar serca */
+    }
+
+    .things {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Dopasowujemy szerokość kolumn */
+    }
+
+    .image {
+        width: 90%; /* Skalujemy zdjęcia do 90% szerokości */
+    }
+
+    .images-container {
+        flex-direction: column; /* Ustawiamy zdjęcia jedno pod drugim */
+        gap: 10px; /* Zmniejszamy odstęp między zdjęciami */
+    }
+
+    .image {
+        width: 100%; /* Zdjęcia zajmują całą szerokość kontenera */
+        max-width: 300px; /* Maksymalna szerokość zdjęcia */
+        margin: 0 auto; /* Wyśrodkowujemy zdjęcia */
+    }
+}
